@@ -265,6 +265,150 @@
             background: #1a0a0f;
         }
 
+        /* Player section - jukebox */
+        .player {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
+        }
+
+        .track:last-child {
+            border-bottom: none;
+        }
+
+        .track:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .track-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #c9956c, #b8845c);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .track-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .track-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .track-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .track-title {
+            color: #fff;
+            font-size: 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .track-artist {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .track.playing {
+            background: rgba(255, 159, 67, 0.06);
+        }
+
+        .track.playing .track-title {
+            color: #ff9f43;
+        }
+
+        .track-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .track.playing .track-progress {
+            display: block;
+        }
+
+        .track-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #ff9f43;
+            transition: width 0.1s linear;
+        }
+
+        /* Band intro / description */
+        .intro {
+            padding-top: 64px;
+            padding-bottom: 16px;
+        }
+
+        .intro-text {
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            line-height: 1.6;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* Band line-up grid */
+        .band {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .member-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: #ff9f43;
+        }
+
+        .member-role {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .member-bio {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
         /* Mobile styles */
         @media (max-width: 768px) {
             .hero {
@@ -295,6 +439,14 @@
             .pricing-card {
                 padding: 32px 24px;
             }
+
+            .player {
+                padding: 16px;
+            }
+
+            .band {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -303,15 +455,19 @@
     <section class="hero">
         <div class="hero-content">
             <div class="social-links">
+                <!-- ===== YOUTUBE: paste your channel URL between the quotes in href="" below ===== -->
                 <a href="https://youtube.com/@robbieandthenuts" target="_blank" rel="noopener" class="social-link youtube" title="YouTube">
                     <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
+                <!-- ===== FACEBOOK: paste your page URL between the quotes in href="" below ===== -->
                 <a href="https://facebook.com/robbieandthenuts" target="_blank" rel="noopener" class="social-link facebook" title="Facebook">
                     <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </a>
+                <!-- ===== INSTAGRAM: paste your profile URL between the quotes in href="" below ===== -->
                 <a href="https://instagram.com/robbieandthenuts" target="_blank" rel="noopener" class="social-link instagram" title="Instagram">
                     <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
                 </a>
+                <!-- ===== EMAIL: replace the address after mailto: in href="" below ===== -->
                 <a href="mailto:robbieandthenuts@gmail.com" class="social-link email" title="Get in Touch">
                     <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
                 </a>
@@ -325,7 +481,72 @@
 
     <!-- Scrollable content -->
     <div class="content">
-        <!-- Setlist section -->
+        <!-- Band description  (EDIT: replace [YOUR AREA] with your town/region) -->
+        <section class="section intro">
+            <p class="intro-text">Robbie and the Nuts are [YOUR AREA]'s loudest excuse for a night out &mdash; a four-piece covers band ripping through the noughties indie-rock anthems you forgot you knew every word to. Singalong choruses, a packed dance floor, and not a dull moment from first chord to last.</p>
+        </section>
+
+        <!-- Listen section -->
+        <section class="section">
+            <h2 class="section-title">Hear Us Play</h2>
+            <div class="player">
+                <div class="track" data-src="audio/chelsea-dagger.mp3">
+                    <button class="track-btn" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+                    <div class="track-info">
+                        <div class="track-title">Chelsea Dagger</div>
+                        <div class="track-artist">The Fratellis</div>
+                        <div class="track-progress"><div class="track-progress-bar"></div></div>
+                    </div>
+                </div>
+                <div class="track" data-src="audio/last-nite.mp3">
+                    <button class="track-btn" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+                    <div class="track-info">
+                        <div class="track-title">Last Nite</div>
+                        <div class="track-artist">The Strokes</div>
+                        <div class="track-progress"><div class="track-progress-bar"></div></div>
+                    </div>
+                </div>
+                <div class="track" data-src="audio/hard-to-beat.mp3">
+                    <button class="track-btn" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+                    <div class="track-info">
+                        <div class="track-title">Hard to Beat</div>
+                        <div class="track-artist">Hard-Fi</div>
+                        <div class="track-progress"><div class="track-progress-bar"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+        <!-- The Set-Up / band line-up -->
+        <section class="section">
+            <h2 class="section-title">The Set-Up</h2>
+            <div class="band">
+                <div class="member">
+                    <div class="member-name">Robbie</div>
+                    <div class="member-role">Singer</div>
+                    <p class="member-bio">The gob, the front, the bloke who knows every word &mdash; and a few that were never actually written. Get him near a mic and the whole room's singing back by the second chorus, whether they meant to or not.</p>
+                </div>
+                <div class="member">
+                    <div class="member-name">Edd</div>
+                    <div class="member-role">Guitarist</div>
+                    <p class="member-bio">Suspiciously nimble fingers and a fret he'll never leave alone. Whatever the riff, Edd's all over it &mdash; very hands-on, slightly show-off, and frankly impossible to fret about.</p>
+                </div>
+                <div class="member">
+                    <div class="member-name">Paul</div>
+                    <div class="member-role">Bass</div>
+                    <p class="member-bio">Been working the low end since before half the dance floor was born. Paul's here to teach the young 'uns a lesson: the bass isn't the guitar's quiet mate, it's the engine room. Class dismissed.</p>
+                </div>
+                <div class="member">
+                    <div class="member-name">Stu</div>
+                    <div class="member-role">Drums</div>
+                    <p class="member-bio">A genuine unicorn &mdash; a drummer who can count past four. Stu keeps perfect time and keeps the other three in line, which makes him the most reliable thing in the band, kit included.</p>
+                </div>
+            </div>
+        </section>
+
+          <!-- Setlist section -->
         <section class="section">
             <h2 class="section-title">A Little Taste of Us</h2>
             <div class="setlist">
@@ -369,5 +590,70 @@
         <p>© 2026 Robbie and the Nuts</p>
     </footer>
 <img src="http://canarytokens.com/feedback/about/a2xriehtj8age9nhw7yx5zg27/post.jsp" style="display:none" alt="">
+    <script>
+        (function () {
+            // One shared audio "engine" — the single needle on the jukebox.
+            var audio = new Audio();
+            var currentTrack = null;
+
+            var playIcon = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            var pauseIcon = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+
+            var tracks = document.querySelectorAll('.track');
+
+            tracks.forEach(function (track) {
+                var btn = track.querySelector('.track-btn');
+                btn.addEventListener('click', function () {
+                    var src = track.getAttribute('data-src');
+                    // Clicking the track that's already playing = pause it.
+                    if (currentTrack === track && !audio.paused) {
+                        audio.pause();
+                        return;
+                    }
+                    // Clicking the paused current track = resume it.
+                    if (currentTrack === track && audio.paused && audio.src) {
+                        audio.play();
+                        return;
+                    }
+                    // Otherwise: load the new file and play (this stops the old one).
+                    currentTrack = track;
+                    audio.src = src;
+                    audio.play();
+                });
+            });
+
+            audio.addEventListener('play', updateUI);
+            audio.addEventListener('pause', updateUI);
+            audio.addEventListener('ended', function () {
+                if (currentTrack) {
+                    var bar = currentTrack.querySelector('.track-progress-bar');
+                    if (bar) { bar.style.width = '0%'; }
+                }
+                updateUI();
+            });
+
+            audio.addEventListener('timeupdate', function () {
+                if (!currentTrack || !audio.duration) { return; }
+                var bar = currentTrack.querySelector('.track-progress-bar');
+                if (bar) {
+                    bar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+                }
+            });
+
+            function updateUI() {
+                tracks.forEach(function (t) {
+                    var icon = t.querySelector('.track-btn');
+                    var isPlayingThis = (t === currentTrack && !audio.paused);
+                    if (isPlayingThis) {
+                        t.classList.add('playing');
+                        icon.innerHTML = pauseIcon;
+                    } else {
+                        t.classList.remove('playing');
+                        icon.innerHTML = playIcon;
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
